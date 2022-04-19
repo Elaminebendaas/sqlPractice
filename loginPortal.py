@@ -29,12 +29,11 @@ def accountCreation():
         
 
 
-
-
 def existanceVerification(defUsername):
     checker = False
     users = c.fetchall()
     user = str(defUsername)
+    print(user)
     for elem in users:
         for usa in elem:
             if usa == user:
@@ -49,13 +48,14 @@ def existanceVerification(defUsername):
     
 
 
-    
+
 
 users = c.fetchall()
 user = 'elamine'
 print(users)
+accountCreation()
 
-if existanceVerification(user) == True:
-    print('wtf')
 
         
+
+
