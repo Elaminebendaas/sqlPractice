@@ -20,8 +20,6 @@ def accountCreation():
         username = input("Enter your desired username: ")
         password = input("Enter your desired password: ")
         if existanceVerification(username) ==  True:  
-            conn.execute("INSERT INTO USERS VALUES(?, ?)",
-            (username, password))
             print('Username already taken, enter a new one.')
         else:
             print("it worked?")
@@ -32,18 +30,14 @@ def accountCreation():
 def existanceVerification(defUsername):
     checker = False
     users = c.fetchall()
-    user = str(defUsername)
-    print(user)
-    for elem in users:
-        for usa in elem:
-            if usa == user:
+    existingUser = str(defUsername)
+    for user in users:
+        for elem in user:
+            if elem == existingUser:
                 checker = True
-                if checker == True:
-                    print("System has recongized another user with the same username. Select another one")
-                    return True
-                else:
-                    print('All clear!')
-                    return False
+                return True
+    if checker == False:
+        return False
 
     
 
