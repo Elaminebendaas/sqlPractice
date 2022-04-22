@@ -1,7 +1,7 @@
 import sqlite3
 
 conn = sqlite3.connect('users.db')
-c = conn.execute("SELECT * FROM users")
+c = conn.execute("SELECT * FROM USERS")
 
 
 
@@ -19,9 +19,12 @@ def accountCreation():
         print('For account creation please input a desired username of password below:\n')
         username = input("Enter your desired username: ")
         password = input("Enter your desired password: ")
-        if existanceVerification(username) ==  True:  
+        checker = existanceVerification(username)
+        if checker ==  True:  
             print('Username already taken, enter a new one.')
         else:
+            conn.execute("INSERT INTO USERS (USERNAME,PASSWORD) VALUES(?,?)",
+                (username, password))
             print("it worked?")
             creationLoop = True
         
@@ -44,10 +47,13 @@ def existanceVerification(defUsername):
 
 
 
-users = c.fetchall()
+
 user = 'elamine'
-print(users)
 accountCreation()
+conn.commit()
+
+users = c.fetchall()
+print(users)
 
 
         
